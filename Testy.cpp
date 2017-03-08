@@ -4,9 +4,6 @@
 
 using namespace std;
 
-Testy::Testy() {
-
-}
 
 void Testy::testTablicy() {
     Tablica tablica;
@@ -22,6 +19,7 @@ void Testy::testTablicy() {
         cout << "    4. Usuń pierwszy" << endl;
         cout << "    5. Usuń ostatni" << endl;
         cout << "    6. Usuń którykolwiek" << endl;
+        cout << "    7. Wydrukuj tablicę" << endl;
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
@@ -37,14 +35,12 @@ void Testy::testTablicy() {
                 cout << "Podaj wartość: ";
                 cin >> wartosc;
                 tablica.dodajNaPoczatek(wartosc);
-                tablica.wydrukujTablice();
                 break;
 
             case 2:
                 cout << "Podaj wartość: ";
                 cin >> wartosc;
                 tablica.dodajNaKoniec(wartosc);
-                tablica.wydrukujTablice();
                 break;
 
             case 3:
@@ -56,6 +52,10 @@ void Testy::testTablicy() {
                 break;
 
             case 4:
+                break;
+
+            case 7:
+                tablica.wydrukujTablice();
                 break;
 
         }

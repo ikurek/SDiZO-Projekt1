@@ -66,7 +66,39 @@ void Tablica::dodajNaKoniec(int wartosc) {
 }
 
 void Tablica::dodajGdziekolwiek(int wartosc, int pozycja) {
+    //Sprawdź, czy wybrana pozycja znajduje się w tablicy
+    //Jeżeli nie, anuluj dodawanie
+    if (pozycja < 0 || pozycja > Tablica::rozmiarTablicy) {
+        cout << "W tablicy nie istnieje pozycja [" << pozycja << "]!" << endl;
+    } else {
 
+        //Zaalokuj pamięć na tablicę większa o jeden element niż poprzednio
+        //Przypisz podaną wartość jako element tablicy na wybranej pozycji
+        int *nowyWskaznikNaHead = new int[Tablica::rozmiarTablicy + 1];
+        nowyWskaznikNaHead[pozycja] = wartosc;
+
+        //Przepisz dane ze starej tablicy do nowej
+        //Przerwij przed wybraną pozycją
+        for (int i = 0; i < pozycja; i++) {
+            nowyWskaznikNaHead[i] = Tablica::wskaznikNaHead[i];
+        }
+
+        //Uzupełnij dane w tablicy po wybranej pozycji
+        //Przepisz dane ze starej tablicy do nowej
+        for (int i = pozycja; i < Tablica::rozmiarTablicy; i++) {
+            nowyWskaznikNaHead[i + 1] = Tablica::wskaznikNaHead[i];
+        }
+
+        //Zwolnij pamięć poprzedniej tablicy
+        //Zastąp wskaźnik na głowę tablicy nowym
+        //TODO: Czy trzeba to usuwać? I tak będzie nadpisane...
+        delete Tablica::wskaznikNaHead;
+        Tablica::wskaznikNaHead = nowyWskaznikNaHead;
+
+        //Zwiększ rozmiar tablicy o 1
+        Tablica::rozmiarTablicy = Tablica::rozmiarTablicy + 1;
+
+    }
 
 }
 

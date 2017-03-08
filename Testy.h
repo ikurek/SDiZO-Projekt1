@@ -9,8 +9,6 @@
 class Testy {
 public:
 
-    Testy();
-
     void testTablicy();
 };
 
