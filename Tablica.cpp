@@ -33,7 +33,6 @@ void Tablica::dodajNaPoczatek(int wartosc) {
 
     //Zwolnij pamięć poprzedniej tablicy
     //Zastąp wskaźnik na głowę tablicy nowym
-    //TODO: Czy trzeba to usuwać? I tak będzie nadpisane...
     delete Tablica::wskaznikNaHead;
     Tablica::wskaznikNaHead = nowyWskaznikNaHead;
 
@@ -56,7 +55,6 @@ void Tablica::dodajNaKoniec(int wartosc) {
 
     //Zwolnij pamięć poprzedniej tablicy
     //Zastąp wskaźnik na głowę tablicy nowym
-    //TODO: Czy trzeba to usuwać? I tak będzie nadpisane...
     delete Tablica::wskaznikNaHead;
     Tablica::wskaznikNaHead = nowyWskaznikNaHead;
 
@@ -91,7 +89,6 @@ void Tablica::dodajGdziekolwiek(int wartosc, int pozycja) {
 
         //Zwolnij pamięć poprzedniej tablicy
         //Zastąp wskaźnik na głowę tablicy nowym
-        //TODO: Czy trzeba to usuwać? I tak będzie nadpisane...
         delete Tablica::wskaznikNaHead;
         Tablica::wskaznikNaHead = nowyWskaznikNaHead;
 
@@ -103,15 +100,99 @@ void Tablica::dodajGdziekolwiek(int wartosc, int pozycja) {
 }
 
 void Tablica::usunOstatni() {
+    //Sprawdź, czy tablica nie jest pusta
+    if (Tablica::rozmiarTablicy > 0) {
+        //Zaalokuj pamięć na tablicę mniejszą o jeden element niż poprzednio
+        int *nowyWskaznikNaHead = new int[Tablica::rozmiarTablicy - 1];
+
+        //Przepisz elementy starej tablicy poza ostatnim
+        for (int i = 0; i < Tablica::rozmiarTablicy - 1; i++) {
+            nowyWskaznikNaHead[i] = Tablica::wskaznikNaHead[i];
+        }
+
+        //zwolnij pamięć po starym wskaźniku
+        //Przypisz nowy wskaźnik na jego miejsce
+        delete[] Tablica::wskaznikNaHead;
+        Tablica::wskaznikNaHead = nowyWskaznikNaHead;
+
+        //Zmniejsz rozmiar tablicy o 1
+        Tablica::rozmiarTablicy = Tablica::rozmiarTablicy - 1;
+    } else {
+        cout << "W tablicy nie ma żadnego elementu!" << endl;
+    }
 
 }
 
 void Tablica::usunPierwszy() {
 
+    //Sprawdź, czy tablica nie jest pusta
+    if (Tablica::rozmiarTablicy > 0) {
+        //Zaalokuj pamięć na tablicę mniejszą o jeden element niż poprzednio
+        int *nowyWskaznikNaHead = new int[Tablica::rozmiarTablicy - 1];
+
+        //Przepisz elementy starej tablicy poza pierwszym
+        for (int i = 0; i < Tablica::rozmiarTablicy - 1; i++) {
+            nowyWskaznikNaHead[i] = Tablica::wskaznikNaHead[i + 1];
+        }
+
+        //zwolnij pamięć po starym wskaźniku
+        //Przypisz nowy wskaźnik na jego miejsce
+        delete[] Tablica::wskaznikNaHead;
+        Tablica::wskaznikNaHead = nowyWskaznikNaHead;
+
+        //Zmniejsz rozmiar tablicy o 1
+        Tablica::rozmiarTablicy = Tablica::rozmiarTablicy - 1;
+    } else {
+        cout << "W tablicy nie ma żadnego elementu!" << endl;
+    }
+
 }
 
 void Tablica::usunKtorys(int pozycja) {
 
+    //Sprawdź, czy tablica nie jest pusta
+    //Sprawdż czy pozycja nie wykracza poza tablicę
+    if (Tablica::rozmiarTablicy > 0 || pozycja > 0 || pozycja < Tablica::rozmiarTablicy) {
+        //Zaalokuj pamięć na tablicę mniejszą o jeden element niż poprzednio
+        int *nowyWskaznikNaHead = new int[Tablica::rozmiarTablicy - 1];
+
+        //Przepisz elementy do wybranej pozycji
+        for (int i = 0; i < pozycja; i++) {
+            nowyWskaznikNaHead[i] = Tablica::wskaznikNaHead[i];
+        }
+
+        //Przepisz elementy po wybranej pozycji
+        for (int i = pozycja; i < Tablica::rozmiarTablicy - 1; i++) {
+            nowyWskaznikNaHead[i] = Tablica::wskaznikNaHead[i + 1];
+        }
+
+        //zwolnij pamięć po starym wskaźniku
+        //Przypisz nowy wskaźnik na jego miejsce
+        delete[] Tablica::wskaznikNaHead;
+        Tablica::wskaznikNaHead = nowyWskaznikNaHead;
+
+        //Zmniejsz rozmiar tablicy o 1
+        Tablica::rozmiarTablicy = Tablica::rozmiarTablicy - 1;
+    } else {
+        cout << "W tablicy nie istnieje pozycja [" << pozycja << "]!" << endl;
+    }
+
+
+}
+
+bool Tablica::sprawdzCzyIstnieje(int wartosc) {
+
+    //Przeszukaj tablicę pod kątem wartości
+    for (int i = 0; i < Tablica::rozmiarTablicy; i++) {
+        //Jeżeli wartość wystąpi w iteracji zwróc true
+        if (Tablica::wskaznikNaHead[i] == wartosc) {
+            cout << "Szukana wartość zajmuje w tablicy pozycję [" << i << "]" << endl;
+            return true;
+        }
+    }
+    //Jeżeli wartość nie wystąpiła w żadnej iteracji tabeli zwróć false
+    cout << "Szukana wartość nie występuje w tablicy" << endl;
+    return false;
 }
 
 void Tablica::wydrukujTablice() {

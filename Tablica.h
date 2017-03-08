@@ -29,6 +29,8 @@ public:
     void usunKtorys(int pozycja);
 
     void wydrukujTablice();
+
+    bool sprawdzCzyIstnieje(int wartosc);
 };
 
 #endif //SDIZO_PROJEKT_TABLICA_H

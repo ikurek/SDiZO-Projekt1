@@ -19,7 +19,8 @@ void Testy::testTablicy() {
         cout << "    4. Usuń pierwszy" << endl;
         cout << "    5. Usuń ostatni" << endl;
         cout << "    6. Usuń którykolwiek" << endl;
-        cout << "    7. Wydrukuj tablicę" << endl;
+        cout << "    7. Wyszukaj element" << endl;
+        cout << "    8. Wydrukuj tablicę" << endl;
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
@@ -52,9 +53,25 @@ void Testy::testTablicy() {
                 break;
 
             case 4:
+                tablica.usunPierwszy();
                 break;
 
+            case 5:
+                tablica.usunOstatni();
+                break;
+
+            case 6:
+                cout << "Podaj pozycję: ";
+                cin >> pozycja;
+                tablica.usunKtorys(pozycja);
+
             case 7:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                tablica.sprawdzCzyIstnieje(wartosc);
+                break;
+
+            case 8:
                 tablica.wydrukujTablice();
                 break;
 
@@ -62,3 +79,5 @@ void Testy::testTablicy() {
 
     }
 }
+
+void Testy::testListy() {}

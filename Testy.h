@@ -10,6 +10,8 @@ class Testy {
 public:
 
     void testTablicy();
+
+    void testListy();
 };
 
 
