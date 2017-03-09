@@ -6,12 +6,12 @@ class Tablica {
 
 
 public:
-    //Zmienne
+//Zmienne
     int *wskaznikNaHead;
 
     int rozmiarTablicy;
 
-    //Metody
+//Metody
     Tablica();
 
     ~Tablica();

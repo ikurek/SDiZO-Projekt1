@@ -37,6 +37,7 @@ int main() {
 
             case 2:
                 cout << "Rozpoczynam test listy..." << endl;
+                testy.testListy();
                 break;
 
             case 3:

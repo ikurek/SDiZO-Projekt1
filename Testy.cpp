@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Testy.h"
 #include "Tablica.h"
+#include "Lista.h"
 
 using namespace std;
 
@@ -64,6 +65,7 @@ void Testy::testTablicy() {
                 cout << "Podaj pozycję: ";
                 cin >> pozycja;
                 tablica.usunKtorys(pozycja);
+                break;
 
             case 7:
                 cout << "Podaj wartość: ";
@@ -80,4 +82,71 @@ void Testy::testTablicy() {
     }
 }
 
-void Testy::testListy() {}
+void Testy::testListy() {
+    Lista lista;
+    int wybor = 99;
+    int wartosc;
+    int pozycja;
+
+    while (wybor != 0) {
+        cout << "Wybierz funkcję listy:" << endl;
+        cout << "    1. Dodaj na początek" << endl;
+        cout << "    2. Dodaj na koniec" << endl;
+        cout << "    3. Dodaj gdziekolwiek" << endl;
+        cout << "    4. Usuń pierwszy" << endl;
+        cout << "    5. Usuń ostatni" << endl;
+        cout << "    6. Usuń którykolwiek" << endl;
+        cout << "    7. Wyszukaj element" << endl;
+        cout << "    8. Wydrukuj listę" << endl;
+        cout << "    0. Wyjście" << endl << endl;
+        cout << "Wybór: ";
+        cin >> wybor;
+        switch (wybor) {
+            default:
+                cout << "Błędny wybór!" << endl;
+                break;
+
+            case 0:
+                break;
+
+            case 1:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                lista.dodajNaPoczatek(wartosc);
+                break;
+
+            case 2:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                break;
+
+            case 3:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                cout << "Podaj pozycję: ";
+                cin >> pozycja;
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+
+            case 6:
+                cout << "Podaj pozycję: ";
+                cin >> pozycja;
+
+            case 7:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                break;
+
+            case 8:
+                lista.wydrukujListe();
+                break;
+
+        }
+
+    }
+}
