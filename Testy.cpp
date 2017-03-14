@@ -118,6 +118,7 @@ void Testy::testListy() {
             case 2:
                 cout << "Podaj wartość: ";
                 cin >> wartosc;
+                lista.dodajNaKoniec(wartosc);
                 break;
 
             case 3:
@@ -125,21 +126,26 @@ void Testy::testListy() {
                 cin >> wartosc;
                 cout << "Podaj pozycję: ";
                 cin >> pozycja;
+                lista.dodajGdziekolwiek(wartosc, pozycja);
                 break;
 
             case 4:
+                lista.usunPierwszy();
                 break;
 
             case 5:
+                lista.usunOstatni();
                 break;
 
             case 6:
                 cout << "Podaj pozycję: ";
                 cin >> pozycja;
+                lista.usunKtorys(pozycja);
 
             case 7:
                 cout << "Podaj wartość: ";
                 cin >> wartosc;
+                lista.sprawdzCzyIstnieje(wartosc);
                 break;
 
             case 8:

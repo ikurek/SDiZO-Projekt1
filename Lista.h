@@ -31,6 +31,14 @@ public:
     void dodajNaKoniec(int wartosc);
 
     void wydrukujListe();
+
+    void usunPierwszy();
+
+    void usunOstatni();
+
+    void usunKtorys(int);
+
+    bool sprawdzCzyIstnieje(int wartosc);
 };
 
 #endif //SDIZO_PROJEKT_LISTA_H
