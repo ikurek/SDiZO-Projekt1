@@ -14,6 +14,17 @@ Lista::Lista() {
 
 Lista::~Lista() {
 
+
+    for (int i = 0; i < Lista::rozmiar; i++) {
+
+        //Przypisz kolejny element jako aktualny
+        Lista::aktualnyElement = Lista::pierwszyElement->nastepny;
+        //Usuń pierwszy element
+        delete Lista::pierwszyElement;
+
+        Lista::pierwszyElement = Lista::aktualnyElement;
+    }
+
 }
 
 void Lista::dodajNaPoczatek(int wartosc) {
