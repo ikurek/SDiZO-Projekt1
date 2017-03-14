@@ -14,6 +14,8 @@ public:
 
     void testListy();
 
+    void testKopca();
+
 };
 
 

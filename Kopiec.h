@@ -1,7 +1,3 @@
-//
-// Created by igor on 14.03.17.
-//
-
 #ifndef SDIZO_PROJEKT_KOPIEC_H
 #define SDIZO_PROJEKT_KOPIEC_H
 
@@ -15,6 +11,13 @@ public:
 
     ~Kopiec();
 
+    void dodaj(int);
+
+    void usun(int);
+
+    bool sprawdzCzyIstnieje(int);
+
+    void wydrukujKopiec();
 };
 
 

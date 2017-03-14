@@ -2,6 +2,7 @@
 #include "Testy.h"
 #include "Tablica.h"
 #include "Lista.h"
+#include "Kopiec.h"
 
 using namespace std;
 
@@ -150,6 +151,54 @@ void Testy::testListy() {
 
             case 8:
                 lista.wydrukujListe();
+                break;
+
+        }
+
+    }
+}
+
+void Testy::testKopca() {
+    Kopiec kopiec;
+    int wybor = 99;
+    int wartosc;
+    while (wybor != 0) {
+        cout << "Wybierz funkcję Kopca:" << endl;
+        cout << "    1. Dodaj" << endl;
+        cout << "    2. Usuń" << endl;
+        cout << "    3. Wyszukaj" << endl;
+        cout << "    4. Wydrukuj kopiec" << endl;
+        cout << "    0. Wyjście" << endl << endl;
+        cout << "Wybór: ";
+        cin >> wybor;
+        switch (wybor) {
+            default:
+                cout << "Błędny wybór!" << endl;
+                break;
+
+            case 0:
+                break;
+
+            case 1:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                kopiec.dodaj(wartosc);
+                break;
+
+            case 2:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                kopiec.usun(wartosc);
+                break;
+
+            case 3:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                kopiec.sprawdzCzyIstnieje(wartosc);
+                break;
+
+            case 4:
+                kopiec.wydrukujKopiec();
                 break;
 
         }

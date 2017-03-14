@@ -42,6 +42,7 @@ int main() {
 
             case 3:
                 cout << "Rozpoczynam test kopca binarnego..." << endl;
+                testy.testKopca();
                 break;
 
             case 4:
