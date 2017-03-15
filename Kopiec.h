@@ -20,6 +20,8 @@ public:
     void wydrukujKopiec();
 
     void poprawStrukture();
+
+    int iloscPoziomow();
 };
 
 

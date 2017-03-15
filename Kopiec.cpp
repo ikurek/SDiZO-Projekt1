@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Kopiec.h"
+#include <cmath>
 
 using namespace std;
 
@@ -39,18 +40,17 @@ void Kopiec::dodaj(int wartosc) {
         //Zastąp starą tablicę nową
         Kopiec::tablica = nowaTablica;
 
+        //Popraw kolejność elementów w kopcu
+        cout << "Poprawianie struktury kopca..." << endl;
+        Kopiec::poprawStrukture();
+
         //Zwiększ rozmiar kopca
         Kopiec::rozmiar = Kopiec::rozmiar + 1;
 
-        //Popraw kolejność elementów w kopcu
-        Kopiec::poprawStrukture();
 
 
 
 
-    } else {
-
-        cout << "Wartość " << wartosc << " już istnieje w kopcu!" << endl;
 
     }
 
@@ -110,6 +110,9 @@ bool Kopiec::sprawdzCzyIstnieje(int wartosc) {
 
 void Kopiec::wydrukujKopiec() {
 
+    cout << "Ilość poziomów drzewa: " << Kopiec::iloscPoziomow() << endl;
+
+
     for (int i = 0; i < Kopiec::rozmiar; i++) {
 
         cout << "    [" << i << "] " << Kopiec::tablica[i] << endl;
@@ -135,4 +138,17 @@ void Kopiec::poprawStrukture() {
 
     }
 
+}
+
+int Kopiec::iloscPoziomow() {
+
+    int iloscPoziomow = 0;
+    int suma = 0;
+
+    do {
+        suma = suma + pow(2, iloscPoziomow);
+        iloscPoziomow = iloscPoziomow + 1;
+    } while (suma < Kopiec::rozmiar);
+
+    return iloscPoziomow;
 }
