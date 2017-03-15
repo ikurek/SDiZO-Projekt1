@@ -18,6 +18,8 @@ public:
     bool sprawdzCzyIstnieje(int);
 
     void wydrukujKopiec();
+
+    void poprawStrukture();
 };
 
 
