@@ -108,16 +108,10 @@ bool Kopiec::sprawdzCzyIstnieje(int wartosc) {
 
 }
 
+
+//FIXME: Nie diała
 void Kopiec::wydrukujKopiec() {
 
-    cout << "Ilość poziomów drzewa: " << Kopiec::iloscPoziomow() << endl;
-
-
-    for (int i = 0; i < Kopiec::rozmiar; i++) {
-
-        cout << "    [" << i << "] " << Kopiec::tablica[i] << endl;
-
-    }
 
 }
 
@@ -143,12 +137,12 @@ void Kopiec::poprawStrukture() {
 int Kopiec::iloscPoziomow() {
 
     int iloscPoziomow = 0;
-    int suma = 0;
+    int iloscElementow = 0;
 
     do {
-        suma = suma + pow(2, iloscPoziomow);
+        iloscElementow = iloscElementow + pow(2, iloscPoziomow);
         iloscPoziomow = iloscPoziomow + 1;
-    } while (suma < Kopiec::rozmiar);
+    } while (iloscElementow < Kopiec::rozmiar);
 
     return iloscPoziomow;
 }

@@ -3,6 +3,7 @@
 #include "Tablica.h"
 #include "Lista.h"
 #include "Kopiec.h"
+#include "Drzewo.h"
 
 using namespace std;
 
@@ -199,6 +200,54 @@ void Testy::testKopca() {
 
             case 4:
                 kopiec.wydrukujKopiec();
+                break;
+
+        }
+
+    }
+}
+
+void Testy::testDrzewa() {
+    Drzewo drzewo;
+    int wybor = 99;
+    int wartosc;
+    while (wybor != 0) {
+        cout << "Wybierz funkcję Drzewa:" << endl;
+        cout << "    1. Dodaj" << endl;
+        cout << "    2. Usuń" << endl;
+        cout << "    3. Wyszukaj" << endl;
+        cout << "    4. Wydrukuj drzewo" << endl;
+        cout << "    0. Wyjście" << endl << endl;
+        cout << "Wybór: ";
+        cin >> wybor;
+        switch (wybor) {
+            default:
+                cout << "Błędny wybór!" << endl;
+                break;
+
+            case 0:
+                break;
+
+            case 1:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                drzewo.dodaj(wartosc);
+                break;
+
+            case 2:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                drzewo.usun(wartosc);
+                break;
+
+            case 3:
+                cout << "Podaj wartość: ";
+                cin >> wartosc;
+                drzewo.wyszukaj(wartosc);
+                break;
+
+            case 4:
+                cout << "NIE DZIAŁA" << endl;
                 break;
 
         }

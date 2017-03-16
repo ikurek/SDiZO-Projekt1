@@ -47,6 +47,7 @@ int main() {
 
             case 4:
                 cout << "Rozpoczynam test drzewa..." << endl;
+                testy.testDrzewa();
                 break;
 
         }

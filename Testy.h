@@ -16,6 +16,7 @@ public:
 
     void testKopca();
 
+    void testDrzewa();
 };
 
 
