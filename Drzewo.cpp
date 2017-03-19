@@ -7,9 +7,6 @@ Drzewo::Drzewo() {
     rozmiar = 0;
 
     //Kolory drzewa określane jako " ", zanim są zdefiniowane
-    kolorPrawy = " ";
-    kolorLewy = " ";
-    kolorRodzica = " ";
 
     //Inicjaliacja strażnika
     straznik.kolor = 'B';
@@ -27,13 +24,15 @@ Drzewo::~Drzewo() {
 void Drzewo::usunWszystko() {
     usunElement(korzen);
 
-    straznik.kolor = 'B';          // Inicjujemy strażnika
+    //Inicjalizacja strażnika
+    straznik.kolor = 'B';
     straznik.rodzic = &straznik;
     straznik.lewo = &straznik;
     straznik.prawo = &straznik;
     korzen = &straznik;
 
 
+    //Ustaw rozmiar drzewa na 1
     Drzewo::rozmiar = 0;
 }
 
@@ -101,84 +100,102 @@ void Drzewo::dodaj(int wartosc) {
 
     ElementDrzewa *X, *Y;
 
-    X = new ElementDrzewa;        // Tworzymy nowy węzeł
-    X->lewo = &straznik;          // Inicjujemy pola
+    //Stworzenie nowego węzła dla drzewa
+    X = new ElementDrzewa;
+    X->lewo = &straznik;
     X->prawo = &straznik;
     X->rodzic = korzen;
     X->wartosc = wartosc;
-    if (X->rodzic == &straznik) korzen = X; // X staje się korzeniem
-    else
-        while (true)             // Szukamy liścia do zastąpienia przez X
-        {
+
+    //Przypisanie korzenia jako X, jeżeli rodzic jest strażnikiem
+    //W przeciwnym wypadku, zastąpienie liścia
+    if (X->rodzic == &straznik) {
+        korzen = X;
+    } else {
+        //Pętla wyszukuje liść do zastąpienia przez X
+        //Zależnie od sytuacji zastępuje prawy lub lewy liść drzewa
+        while (true) {
+            //X zastępuje lewy liść
             if (wartosc < X->rodzic->wartosc) {
                 if (X->rodzic->lewo == &straznik) {
-                    X->rodzic->lewo = X;  // X zastępuje lewy liść
+                    X->rodzic->lewo = X;
                     break;
                 }
                 X->rodzic = X->rodzic->lewo;
+
+                // X zastępuje prawy liść
             } else if (wartosc > X->rodzic->wartosc) {
                 if (X->rodzic->prawo == &straznik) {
-                    X->rodzic->prawo = X; // X zastępuje prawy liść
+                    X->rodzic->prawo = X;
                     break;
                 }
                 X->rodzic = X->rodzic->prawo;
+
+                //Brak możliwości zastąpienia liścia
             } else {
                 delete X;
                 return;
             }
         }
 
-    X->kolor = 'R';         // Węzeł kolorujemy na czerwono
-    while ((X != korzen) && (X->rodzic->kolor == 'R')) {
-        if (X->rodzic == X->rodzic->rodzic->lewo) {
-            Y = X->rodzic->rodzic->prawo; // Y -> wujek X
+        //Kolorowanie węzła na czerwono
+        X->kolor = 'R';
+        while ((X != korzen) && (X->rodzic->kolor == 'R')) {
+            if (X->rodzic == X->rodzic->rodzic->lewo) {
+                Y = X->rodzic->rodzic->prawo;
 
-            if (Y->kolor == 'R')  // Przypadek 1
-            {
+                //Przypadek 1
+                if (Y->kolor == 'R') {
+                    X->rodzic->kolor = 'B';
+                    Y->kolor = 'B';
+                    X->rodzic->rodzic->kolor = 'R';
+                    X = X->rodzic->rodzic;
+                    continue;
+                }
+
+                //Przypadek 2
+                if (X == X->rodzic->prawo) {
+                    X = X->rodzic;
+                    obrotWLewo(X);
+                }
+
+                //Przypadek 3
                 X->rodzic->kolor = 'B';
-                Y->kolor = 'B';
                 X->rodzic->rodzic->kolor = 'R';
-                X = X->rodzic->rodzic;
-                continue;
-            }
+                obrotWPrawo(X->rodzic->rodzic);
+                break;
 
-            if (X == X->rodzic->prawo) // Przypadek 2
-            {
-                X = X->rodzic;
-                obrotWLewo(X);
-            }
+                //Przypadki lustrzane
+            } else {
+                Y = X->rodzic->rodzic->lewo;
 
-            X->rodzic->kolor = 'B'; // Przypadek 3
-            X->rodzic->rodzic->kolor = 'R';
-            obrotWPrawo(X->rodzic->rodzic);
-            break;
-        } else {                  // Przypadki lustrzane
-            Y = X->rodzic->rodzic->lewo;
+                //Przypadek lustrzany 1
+                if (Y->kolor == 'R') {
+                    X->rodzic->kolor = 'B';
+                    Y->kolor = 'B';
+                    X->rodzic->rodzic->kolor = 'R';
+                    X = X->rodzic->rodzic;
+                    continue;
+                }
 
-            if (Y->kolor == 'R') // Przypadek 1
-            {
+                //Przypadek lustrzany 2
+                if (X == X->rodzic->lewo) {
+                    X = X->rodzic;
+                    obrotWPrawo(X);
+                }
+
+                //Przypadek lustrzany 3
                 X->rodzic->kolor = 'B';
-                Y->kolor = 'B';
                 X->rodzic->rodzic->kolor = 'R';
-                X = X->rodzic->rodzic;
-                continue;
+                obrotWLewo(X->rodzic->rodzic);
+                break;
             }
-
-            if (X == X->rodzic->lewo) // Przypadek 2
-            {
-                X = X->rodzic;
-                obrotWPrawo(X);
-            }
-
-            X->rodzic->kolor = 'B'; // Przypadek 3
-            X->rodzic->rodzic->kolor = 'R';
-            obrotWLewo(X->rodzic->rodzic);
-            break;
         }
-    }
-    korzen->kolor = 'B';
+        korzen->kolor = 'B';
 
-    rozmiar++;
+        //Zwiększenie rozmiaru drzewa o 1
+        rozmiar++;
+    }
 }
 
 void Drzewo::usun(int wartosc) {
@@ -208,59 +225,73 @@ void Drzewo::usun(int wartosc) {
             if (Z == Z->rodzic->lewo) {
                 W = Z->rodzic->prawo;
 
-                if (W->kolor == 'R') {              // Przypadek 1
+                //Przypadek 1
+                if (W->kolor == 'R') {
                     W->kolor = 'B';
                     Z->rodzic->kolor = 'R';
                     obrotWLewo(Z->rodzic);
                     W = Z->rodzic->prawo;
                 }
 
-                if ((W->lewo->kolor == 'B') && (W->prawo->kolor == 'B')) {              // Przypadek 2
+                //Przypadek 2
+                if ((W->lewo->kolor == 'B') && (W->prawo->kolor == 'B')) {
                     W->kolor = 'R';
                     Z = Z->rodzic;
                     continue;
                 }
 
-                if (W->prawo->kolor == 'B') {              // Przypadek 3
+                //Przypadek 3
+                if (W->prawo->kolor == 'B') {
                     W->lewo->kolor = 'B';
                     W->kolor = 'R';
                     obrotWPrawo(W);
                     W = Z->rodzic->prawo;
                 }
 
-                W->kolor = Z->rodzic->kolor; // Przypadek 4
+                //Przypadek 4
+                W->kolor = Z->rodzic->kolor;
                 Z->rodzic->kolor = 'B';
                 W->prawo->kolor = 'B';
                 obrotWLewo(Z->rodzic);
-                Z = korzen;         // To spowoduje zakończenie pętli
-            } else {                // Przypadki lustrzane
+
+                //Zakończenie pętli
+                Z = korzen;
+
+                //Przypadki lustrzane
+            } else {
                 W = Z->rodzic->lewo;
 
-                if (W->kolor == 'R') {              // Przypadek 1
+                //Lustrzany przypadek 1
+                if (W->kolor == 'R') {
                     W->kolor = 'B';
                     Z->rodzic->kolor = 'R';
                     obrotWLewo(Z->rodzic);
                     W = Z->rodzic->lewo;
                 }
 
-                if ((W->lewo->kolor == 'B') && (W->prawo->kolor == 'B')) {              // Przypadek 2
+                //Lustrzany przypadek 2
+                if ((W->lewo->kolor == 'B') && (W->prawo->kolor == 'B')) {
                     W->kolor = 'R';
                     Z = Z->rodzic;
                     continue;
                 }
 
-                if (W->lewo->kolor == 'B') {              // Przypadek 3
+                //Lustrzany przypadek 3
+                if (W->lewo->kolor == 'B') {
                     W->prawo->kolor = 'B';
                     W->kolor = 'R';
                     obrotWLewo(W);
                     W = Z->rodzic->lewo;
                 }
 
-                W->kolor = Z->rodzic->kolor;  // Przypadek 4
+                //Lustrzany przypadek 4
+                W->kolor = Z->rodzic->kolor;
                 Z->rodzic->kolor = 'B';
                 W->lewo->kolor = 'B';
                 obrotWPrawo(Z->rodzic);
-                Z = korzen;         // To spowoduje zakończenie pętli
+
+                //Zakończenie pętli
+                Z = korzen;
             }
 
     Z->kolor = 'B';

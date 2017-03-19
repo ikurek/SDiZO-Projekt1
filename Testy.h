@@ -1,6 +1,5 @@
-//
-// Created by igor on 08.03.17.
-//
+#include <iostream>
+#include "Czas.h"
 
 #ifndef SDIZO_PROJEKT_TESTY_H
 #define SDIZO_PROJEKT_TESTY_H

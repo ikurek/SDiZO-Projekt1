@@ -12,9 +12,6 @@ class Drzewo {
     int rozmiar;
     ElementDrzewa *korzen;
     ElementDrzewa straznik;
-    string kolorPrawy;
-    string kolorLewy;
-    string kolorRodzica;
 
 public:
     Drzewo();
