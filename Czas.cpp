@@ -15,6 +15,6 @@ void Czas::czasStop() {
 
 long Czas::czasWykonania() {
 
-    return duration_cast<microseconds>(Czas::czasKoncowy - Czas::czasPoczatkowy).count();
+    return duration_cast<nanoseconds>(Czas::czasKoncowy - Czas::czasPoczatkowy).count();
 
 }

@@ -1,13 +1,16 @@
 #include <iostream>
 
 #include "Testy.h"
+#include "TestyAutomatyczne.h"
 
 using namespace std;
 
 int main() {
     //Inicjalizacja klasy testującej
     Testy testy;
+    TestyAutomatyczne testyAutomatyczne;
     int wybor = 99;
+    string tn = "n";
 
     cout << "SDiZO, Projekt 1, Igor Kurek, 226004" << endl << endl;
 
@@ -22,6 +25,13 @@ int main() {
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
+
+        //Zamknij, jeżeli wybrano 0
+        if (wybor == 0) return 0;
+
+        cout << "Automatyzować test? (t/n): ";
+        cin >> tn;
+
         switch (wybor) {
             default:
                 cout << "Błędny wybór!" << endl;
@@ -32,22 +42,27 @@ int main() {
 
             case 1:
                 cout << "Rozpoczynam test tablicy dynamicznej..." << endl;
-                testy.testTablicy();
+                if (tn == "t") testyAutomatyczne.testTablicy();
+                else testy.testTablicy();
+
                 break;
 
             case 2:
                 cout << "Rozpoczynam test listy..." << endl;
-                testy.testListy();
+                if (tn == "t") testyAutomatyczne.testListy();
+                else testy.testListy();
                 break;
 
             case 3:
                 cout << "Rozpoczynam test kopca binarnego..." << endl;
-                testy.testKopca();
+                if (tn == "t") testyAutomatyczne.testKopca();
+                else testy.testKopca();
                 break;
 
             case 4:
                 cout << "Rozpoczynam test drzewa..." << endl;
-                testy.testDrzewa();
+                if (tn == "t") testyAutomatyczne.testDrzewa();
+                else testy.testDrzewa();
                 break;
 
         }
