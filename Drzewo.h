@@ -9,11 +9,10 @@ using namespace std;
 
 class Drzewo {
 
-    int rozmiar;
-    ElementDrzewa *korzen;
-    ElementDrzewa straznik;
-
 public:
+
+    int rozmiar;
+
     Drzewo();
 
     ~Drzewo();
@@ -28,10 +27,13 @@ public:
 
     void obrotWPrawo(ElementDrzewa *);
 
-    void wyszukaj(int);
+    void sprawdzCzyIstnieje(int);
 
 private:
 
+    ElementDrzewa *korzen;
+
+    ElementDrzewa straznik;
 
     void usunElement(ElementDrzewa *);
 

@@ -312,7 +312,7 @@ void Testy::testDrzewa() {
                 cout << "Podaj wartość: ";
                 cin >> wartosc;
                 czas.czasStart();
-                drzewo.wyszukaj(wartosc);
+                drzewo.sprawdzCzyIstnieje(wartosc);
                 czas.czasStop();
                 cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
                 break;

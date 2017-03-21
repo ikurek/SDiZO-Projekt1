@@ -312,7 +312,7 @@ void Drzewo::znajdzElement(int wartosc, ElementDrzewa *korzenElementuDrzewa, Ele
     }
 }
 
-void Drzewo::wyszukaj(int wartosc) {
+void Drzewo::sprawdzCzyIstnieje(int wartosc) {
     bool znalezione = false;
     znajdzWartosc(wartosc, korzen, znalezione);
 

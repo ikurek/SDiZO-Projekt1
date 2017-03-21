@@ -41,7 +41,6 @@ void Kopiec::dodaj(int wartosc) {
         tablica = nowaTablica;
 
         //Popraw kolejność elementów w kopcu
-        cout << "Poprawianie struktury kopca..." << endl;
         Kopiec::poprawStrukture();
 
         //Zwiększ rozmiar kopca

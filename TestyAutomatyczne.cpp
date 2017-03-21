@@ -10,6 +10,7 @@
 using namespace std;
 
 void TestyAutomatyczne::testTablicy() {
+    srand(time(NULL));
     Czas czas;
     Tablica tablica;
     int wybor = 99;
@@ -45,7 +46,7 @@ void TestyAutomatyczne::testTablicy() {
 
         //Otwórz pliki
         plikWejsciowy.open("/home/igor/SDiZO-Projekt/Input/" + daneWejsciowe);
-        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/" + daneWyjsciowe, fstream::out);
+        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/Tablica/" + daneWyjsciowe, fstream::out);
         //Sprawdż czy plik jest otwarty poprawnie
         if (plikWejsciowy.is_open()) {
             cout << "Otwarto plik " << daneWejsciowe << endl;
@@ -75,14 +76,12 @@ void TestyAutomatyczne::testTablicy() {
                 while (plikWejsciowy.good()) {
                     //Wczytaj wartość z pliku
                     plikWejsciowy >> wartosc;
-                    cout << "Wczytuje wartosc " << wartosc << endl;
                     //Wykonaj funkcję z pomiarem
                     czas.czasStart();
                     tablica.dodajNaPoczatek(wartosc);
                     czas.czasStop();
                     //Zapisz do pliku wynik pomiaru
                     plikWyjsciowy << czas.czasWykonania() << endl;
-                    cout << "Zapisuje wartosc " << czas.czasWykonania() << endl;
                 }
 
                 //Zamknij oba pliki
@@ -91,55 +90,124 @@ void TestyAutomatyczne::testTablicy() {
                 break;
 
             case 2:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                tablica.dodajNaKoniec(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                cout << "Rozpoczynam test automatyczny...";
+
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.dodajNaKoniec(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 3:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                cout << "Podaj pozycję: ";
-                cin >> pozycja;
-                czas.czasStart();
-                tablica.dodajGdziekolwiek(wartosc, pozycja);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                cout << "Rozpoczynam test automatyczny...";
+
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.dodajGdziekolwiek(wartosc, rand() % tablica.rozmiarTablicy);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 4:
-                czas.czasStart();
-                tablica.usunPierwszy();
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                cout << "Rozpoczynam test automatyczny...";
+
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    tablica.dodajNaPoczatek(wartosc);
+                }
+                while (tablica.rozmiarTablicy != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.usunPierwszy();
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 5:
-                czas.czasStart();
-                tablica.usunOstatni();
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    tablica.dodajNaPoczatek(wartosc);
+                }
+                while (tablica.rozmiarTablicy != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.usunOstatni();
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 6:
-                cout << "Podaj pozycję: ";
-                cin >> pozycja;
-                czas.czasStart();
-                tablica.usunKtorys(pozycja);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    tablica.dodajNaPoczatek(wartosc);
+                }
+                while (tablica.rozmiarTablicy != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.usunKtorys(rand() % tablica.rozmiarTablicy);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 7:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                tablica.sprawdzCzyIstnieje(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    tablica.dodajNaPoczatek(wartosc);
+                }
+
+                for (int i = 0; i < tablica.rozmiarTablicy; i++) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    tablica.sprawdzCzyIstnieje(rand() % 2000000 - 1000000);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 8:
@@ -154,6 +222,7 @@ void TestyAutomatyczne::testTablicy() {
 }
 
 void TestyAutomatyczne::testListy() {
+    srand(time(NULL));
     Czas czas;
     Lista lista;
     int wybor = 99;
@@ -194,7 +263,7 @@ void TestyAutomatyczne::testListy() {
 
         //Otwórz pliki
         plikWejsciowy.open("/home/igor/SDiZO-Projekt/Input/" + daneWejsciowe);
-        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/" + daneWyjsciowe, fstream::out);
+        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/Lista/" + daneWyjsciowe, fstream::out);
         //Sprawdż czy plik jest otwarty poprawnie
         if (plikWejsciowy.is_open()) {
             cout << "Otwarto plik " << daneWejsciowe << endl;
@@ -219,60 +288,135 @@ void TestyAutomatyczne::testListy() {
                 break;
 
             case 1:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                lista.dodajNaPoczatek(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.dodajNaPoczatek(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 2:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                lista.dodajNaKoniec(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.dodajNaKoniec(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 3:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                cout << "Podaj pozycję: ";
-                cin >> pozycja;
-                czas.czasStart();
-                lista.dodajGdziekolwiek(wartosc, pozycja);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.dodajGdziekolwiek(wartosc, rand() % lista.rozmiar);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 4:
-                czas.czasStart();
-                lista.usunPierwszy();
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    lista.dodajNaPoczatek(wartosc);
+                }
+                while (lista.rozmiar != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.usunPierwszy();
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 5:
-                czas.czasStart();
-                lista.usunOstatni();
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    lista.dodajNaPoczatek(wartosc);
+                }
+                while (lista.rozmiar != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.usunOstatni();
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 6:
-                cout << "Podaj pozycję: ";
-                cin >> pozycja;
-                czas.czasStart();
-                lista.usunKtorys(pozycja);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    lista.dodajNaPoczatek(wartosc);
+                }
+                while (lista.rozmiar != 0) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.usunKtorys(rand() % lista.rozmiar);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
+                break;
 
             case 7:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                lista.sprawdzCzyIstnieje(wartosc);
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    lista.dodajNaPoczatek(wartosc);
+                }
+
+                for (int i = 0; i < lista.rozmiar; i++) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    lista.sprawdzCzyIstnieje(rand() % 2000000 - 1000000);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 8:
@@ -288,6 +432,7 @@ void TestyAutomatyczne::testListy() {
 }
 
 void TestyAutomatyczne::testKopca() {
+    srand(time(NULL));
     Czas czas;
     Kopiec kopiec;
     int wybor = 99;
@@ -306,10 +451,6 @@ void TestyAutomatyczne::testKopca() {
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
-        cout << "Plik zawierający dane wejściowe: ";
-        cin >> daneWejsciowe;
-        cout << "Plik z wynikami testu: ";
-        cin >> daneWyjsciowe;
 
         //Zamknij, jeżeli wybrano 0
         if (wybor == 0) return;
@@ -322,7 +463,7 @@ void TestyAutomatyczne::testKopca() {
 
         //Otwórz pliki
         plikWejsciowy.open("/home/igor/SDiZO-Projekt/Input/" + daneWejsciowe);
-        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/" + daneWyjsciowe, fstream::out);
+        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/Kopiec/" + daneWyjsciowe, fstream::out);
         //Sprawdż czy plik jest otwarty poprawnie
         if (plikWejsciowy.is_open()) {
             cout << "Otwarto plik " << daneWejsciowe << endl;
@@ -347,30 +488,64 @@ void TestyAutomatyczne::testKopca() {
                 break;
 
             case 1:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                kopiec.dodaj(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    kopiec.dodaj(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 2:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                kopiec.usun(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    kopiec.dodaj(wartosc);
+                }
+
+
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    kopiec.usun(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 3:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                kopiec.sprawdzCzyIstnieje(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    kopiec.dodaj(wartosc);
+                }
+
+                for (int i = 0; i < kopiec.rozmiar; i++) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    kopiec.sprawdzCzyIstnieje(rand() % 2000000 - 1000000);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 4:
@@ -385,6 +560,7 @@ void TestyAutomatyczne::testKopca() {
 }
 
 void TestyAutomatyczne::testDrzewa() {
+    srand(time(NULL));
     Czas czas;
     Drzewo drzewo;
     int wybor = 99;
@@ -403,10 +579,6 @@ void TestyAutomatyczne::testDrzewa() {
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
-        cout << "Plik zawierający dane wejściowe: ";
-        cin >> daneWejsciowe;
-        cout << "Plik z wynikami testu: ";
-        cin >> daneWyjsciowe;
 
         //Zamknij, jeżeli wybrano 0
         if (wybor == 0) return;
@@ -419,7 +591,7 @@ void TestyAutomatyczne::testDrzewa() {
 
         //Otwórz pliki
         plikWejsciowy.open("/home/igor/SDiZO-Projekt/Input/" + daneWejsciowe);
-        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/" + daneWyjsciowe, fstream::out);
+        plikWyjsciowy.open("/home/igor/SDiZO-Projekt/Output/Drzewo/" + daneWyjsciowe, fstream::out);
         //Sprawdż czy plik jest otwarty poprawnie
         if (plikWejsciowy.is_open()) {
             cout << "Otwarto plik " << daneWejsciowe << endl;
@@ -444,31 +616,66 @@ void TestyAutomatyczne::testDrzewa() {
                 break;
 
             case 1:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                drzewo.dodaj(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                while (plikWejsciowy.good()) {
+                    //Wczytaj wartość z pliku
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    drzewo.dodaj(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 2:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                drzewo.usun(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    drzewo.dodaj(wartosc);
+                }
+
+
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    drzewo.usun(wartosc);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
 
             case 3:
-                cout << "Podaj wartość: ";
-                cin >> wartosc;
-                czas.czasStart();
-                drzewo.wyszukaj(wartosc);
-                czas.czasStop();
-                cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                //Wypełnij tablicę wartościami
+                while (plikWejsciowy.good()) {
+                    plikWejsciowy >> wartosc;
+                    drzewo.dodaj(wartosc);
+                }
+
+                for (int i = 0; i < drzewo.rozmiar; i++) {
+                    //Wykonaj funkcję z pomiarem
+                    czas.czasStart();
+                    drzewo.sprawdzCzyIstnieje(rand() % 2000000 - 1000000);
+                    czas.czasStop();
+                    //Zapisz do pliku wynik pomiaru
+                    plikWyjsciowy << czas.czasWykonania() << endl;
+                }
+
+                //Zamknij oba pliki
+                plikWejsciowy.close();
+                plikWyjsciowy.close();
                 break;
+
 
             case 4:
                 czas.czasStart();
