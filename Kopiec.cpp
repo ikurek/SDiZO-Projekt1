@@ -80,6 +80,7 @@ void Kopiec::usun(int wartosc) {
 
             //Popraw kolejność elementów w tablicy kopca
             Kopiec::poprawStrukture();
+            return;
 
         }
 

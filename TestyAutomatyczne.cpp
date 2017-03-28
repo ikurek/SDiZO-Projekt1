@@ -247,10 +247,6 @@ void TestyAutomatyczne::testListy() {
         cout << "    0. Wyjście" << endl << endl;
         cout << "Wybór: ";
         cin >> wybor;
-        cout << "Plik zawierający dane wejściowe: ";
-        cin >> daneWejsciowe;
-        cout << "Plik z wynikami testu: ";
-        cin >> daneWyjsciowe;
 
         //Zamknij, jeżeli wybrano 0
         if (wybor == 0) return;
@@ -325,10 +321,16 @@ void TestyAutomatyczne::testListy() {
                 while (plikWejsciowy.good()) {
                     //Wczytaj wartość z pliku
                     plikWejsciowy >> wartosc;
-                    //Wykonaj funkcję z pomiarem
-                    czas.czasStart();
-                    lista.dodajGdziekolwiek(wartosc, rand() % lista.rozmiar);
-                    czas.czasStop();
+
+                    if (lista.rozmiar == 0) {
+                        czas.czasStart();
+                        lista.dodajGdziekolwiek(wartosc, 0);
+                        czas.czasStop();
+                    } else {
+                        czas.czasStart();
+                        lista.dodajGdziekolwiek(wartosc, 1);
+                        czas.czasStop();
+                    }
                     //Zapisz do pliku wynik pomiaru
                     plikWyjsciowy << czas.czasWykonania() << endl;
                 }
@@ -505,11 +507,6 @@ void TestyAutomatyczne::testKopca() {
                 break;
 
             case 2:
-                //Wypełnij tablicę wartościami
-                while (plikWejsciowy.good()) {
-                    plikWejsciowy >> wartosc;
-                    kopiec.dodaj(wartosc);
-                }
 
 
                 while (plikWejsciowy.good()) {

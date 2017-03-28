@@ -69,7 +69,6 @@ void Lista::dodajNaKoniec(int wartosc) {
     rozmiar++;
 }
 
-//FIXME: NIE DZIAŁA!!!
 void Lista::dodajGdziekolwiek(int wartosc, int pozycja) {
 
     //Sprawdź czy w liście istnieje pozycja podana przez użytkownika
@@ -172,8 +171,59 @@ void Lista::usunOstatni() {
 
 }
 
-//FIXME: Nie działa dodawanie, to nie ma też usuwania...
 void Lista::usunKtorys(int pozycja) {
+
+//Sprawdź czy w liście istnieje pozycja podana przez użytkownika
+    if (pozycja < 0 || pozycja > rozmiar) {
+        cout << "W liście nie istnieje pozycja [" << pozycja << "]" << endl;
+        return;
+    }
+    //Sprawdź czy wybrana pozycja jest pierwszą
+    if (pozycja == 0) {
+        usunPierwszy();
+        return;
+    }
+
+    //Sprawdź czy wybrana pozycja jest ostatnią
+    if (pozycja == rozmiar - 1) {
+        usunOstatni();
+        return;
+    }
+
+    //Sprawdź w której połowie listy znajduje się wybrany element
+    if (pozycja < rozmiar / 2) {
+
+        //Przypisz za aktualny element pierwszy
+        aktualnyElement = pierwszyElement;
+
+        //Przesuń wszyskie elementy o jeden dalej
+        for (int i = 1; i < pozycja; ++i) {
+            aktualnyElement = aktualnyElement->nastepny;
+        }
+
+    } else {
+
+        //Przypisz za aktualny element ostatni
+        aktualnyElement = ostatniElement;
+
+        //Przesuń wszystkie elementy o jedną pozycję wstecz
+        for (int i = 0; i < rozmiar - pozycja; ++i) {
+            aktualnyElement = aktualnyElement->poprzedni;
+        }
+
+    }
+
+    //Stwórz nowy element listy z podanymi parametrami
+    ElementListy *nowyElementListy = aktualnyElement->nastepny;
+
+    //przypisz nowy element w odpowiednim miejscu tablicy
+    aktualnyElement->nastepny = nowyElementListy->nastepny;
+    aktualnyElement->nastepny->poprzedni = nowyElementListy;
+
+    delete[]nowyElementListy;
+
+    //Zmniejsz rozmiar listy
+    rozmiar--;
 
 }
 
