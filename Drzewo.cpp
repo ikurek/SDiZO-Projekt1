@@ -337,6 +337,10 @@ void Drzewo::znajdzWartosc(int wartosc, ElementDrzewa *korzenElementuDrzewa, boo
 
 }
 
+void Drzewo::wydrukujDrzewo() {
+
+}
+
 ElementDrzewa *Drzewo::znajdzNastepnyElement(ElementDrzewa *p) {
     ElementDrzewa *nastepnyElementDrzewa;
 

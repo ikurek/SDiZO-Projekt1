@@ -95,7 +95,7 @@ void Lista::dodajGdziekolwiek(int wartosc, int pozycja) {
         aktualnyElement = pierwszyElement;
 
         //Przesuń wszyskie elementy o jeden dalej
-        for (int i = 1; i < pozycja; ++i) {
+        for (int i = 1; i < pozycja - 1; ++i) {
             aktualnyElement = aktualnyElement->nastepny;
         }
 
@@ -105,7 +105,7 @@ void Lista::dodajGdziekolwiek(int wartosc, int pozycja) {
         aktualnyElement = ostatniElement;
 
         //Przesuń wszystkie elementy o jedną pozycję wstecz
-        for (int i = 0; i < Lista::rozmiar - pozycja; ++i) {
+        for (int i = 0; i < Lista::rozmiar - pozycja - 1; ++i) {
             aktualnyElement = aktualnyElement->poprzedni;
         }
 
@@ -197,7 +197,7 @@ void Lista::usunKtorys(int pozycja) {
         aktualnyElement = pierwszyElement;
 
         //Przesuń wszyskie elementy o jeden dalej
-        for (int i = 1; i < pozycja; ++i) {
+        for (int i = 1; i < pozycja - 1; ++i) {
             aktualnyElement = aktualnyElement->nastepny;
         }
 
@@ -207,7 +207,7 @@ void Lista::usunKtorys(int pozycja) {
         aktualnyElement = ostatniElement;
 
         //Przesuń wszystkie elementy o jedną pozycję wstecz
-        for (int i = 0; i < rozmiar - pozycja; ++i) {
+        for (int i = 0; i < rozmiar - pozycja - 1; ++i) {
             aktualnyElement = aktualnyElement->poprzedni;
         }
 

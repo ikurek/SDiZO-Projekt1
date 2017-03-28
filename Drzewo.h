@@ -45,6 +45,7 @@ private:
 
     ElementDrzewa *znajdzNajmniejszyElementDrzewa(ElementDrzewa *);
 
+    void wydrukujDrzewo();
 };
 
 #endif //SDIZO_PROJEKT_DRZEWO_H

@@ -186,6 +186,7 @@ void Testy::testListy() {
                 lista.usunKtorys(pozycja);
                 czas.czasStop();
                 cout << "Czas wykonania: " << czas.czasWykonania() << "ms" << endl;
+                break;
 
             case 7:
                 cout << "Podaj wartość: ";

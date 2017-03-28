@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "Kopiec.h"
 
 using namespace std;
@@ -105,9 +104,19 @@ bool Kopiec::sprawdzCzyIstnieje(int wartosc) {
 }
 
 
-//FIXME: Nie diała
+
 void Kopiec::wydrukujKopiec() {
 
+    cout << "Aktualny stan kopca:" << endl;
+    //Jeżeli tablica nie ma elementów, wyświetl komunikat
+    //W przeciwnym wypadku wydrukuj wszystkie elementy tablicy
+    if (tablica != NULL) {
+        for (int i = 0; i < rozmiar; i++) {
+            cout << "    [" << i << "] " << tablica[i] << endl;
+        }
+    } else {
+        cout << "    Tablica nie ma żadnych elementów" << endl;
+    }
 
 }
 
@@ -128,17 +137,4 @@ void Kopiec::poprawStrukture() {
 
     }
 
-}
-
-int Kopiec::iloscPoziomow() {
-
-    int iloscPoziomow = 0;
-    int iloscElementow = 0;
-
-    do {
-        iloscElementow = iloscElementow + pow(2, iloscPoziomow);
-        iloscPoziomow = iloscPoziomow + 1;
-    } while (iloscElementow < rozmiar);
-
-    return iloscPoziomow;
 }
